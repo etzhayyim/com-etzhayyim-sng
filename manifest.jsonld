@@ -1,0 +1,21 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://etzhayyim.com/ns/actor-manifest"
+  ],
+  "@type": "ActorManifest",
+  "id": "did:web:etzhayyim.github.io:com-etzhayyim-sng",
+  "name": "sng",
+  "displayName": "SNG — e-methane / Sabatier Methanation Attestation",
+  "displayNameJa": "合成メタン",
+  "description": "Closed-loop synthetic-methane manufacturing artificial organism: the carbon-chain-of-custody attestation a Sabatier methanation operation (CO2 + 4H2 → CH4 + 2H2O over Ni/γ-Al2O3) must hold before a batch may be recorded as e-methane, per ADR-2605265900. Promoted from the hikari sng_sabatier cell to a full actor. Containment + independent governor + append-only batch ledger.",
+  "tier": "Tier-B",
+  "parentActor": null,
+  "firstTouchChannelInvariant": "app-aozora — com.atproto.repo.createRecord (collection com.etzhayyim.apps.sng). publication = SPEECH (autonomous); NOT actuation.",
+  "lexicons": [
+    "com.etzhayyim.apps.sng.batchAttestation"
+  ],
+  "adr": {
+    "topology": "com-junkawasaki:adr:2607022300"
+  }
+}
