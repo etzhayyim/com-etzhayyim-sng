@@ -25,7 +25,27 @@
    2 {:label "assisted"       :assess assess-ops     :auto #{:batch/attest}}
    3 {:label "supervised"     :assess assess-ops     :auto #{:batch/attest}}})
 
-(def default-phase 3)
+(def default-phase
+  "The phase used when `context` carries no :phase at all
+  (sng.synthesis: (:phase context phase/default-phase)), AND the
+  fallback `gate` itself uses for an unrecognized phase NUMBER
+  (`(get phases phase (get phases default-phase))`). This is directly
+  reachable by any ordinary caller that simply omits :phase -- not just
+  malformed/malicious input -- so it must be the MOST CONSERVATIVE
+  phase, never the most permissive: 'can only add caution' (this
+  namespace's own docstring) has to hold for a MISSING phase too, not
+  only an explicitly-set low one. This was 3 (supervised, the most
+  permissive tier -- :batch/attest can auto-commit) until a live check
+  confirmed a caller who forgets :phase silently got maximum autonomy
+  instead of the safe default -- the same accidental-fail-open shape
+  already found and fixed this session in the shared talent.phase
+  template this actor's own README names as its reference lineage
+  (gftd-talent-actor), plus its siblings newscaster.phase, wami.phase,
+  and kyoninka.phase, which all inherited the same bug. 1 (bench-pilot)
+  matches those fixes and the sibling ports that already chose it
+  correctly (tsumugu.phase / shiropico.phase) -- :pathway/select remains
+  unaffected either way (never in any phase's :auto set)."
+  1)
 
 (defn record-op? [op] (contains? record-ops op))
 

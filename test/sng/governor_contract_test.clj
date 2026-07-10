@@ -107,6 +107,22 @@
     (is (= :hold (get-in res [:state :disposition])))
     (is (= :phase-disabled (-> (store/ledger s) last :phase-reason)))))
 
+(deftest missing-phase-context-does-not-grant-max-autonomy
+  ;; default-phase is the fallback both when :phase is entirely absent
+  ;; from context (sng.synthesis) and when an unrecognized phase number
+  ;; is passed (phase/gate). It used to be 3 -- the most permissive
+  ;; tier, where :batch/attest auto-commits -- so a caller that simply
+  ;; forgot to set :phase silently got MAXIMUM autonomy instead of the
+  ;; safe "start narrow" default this namespace's own docstring
+  ;; promises.
+  (testing "omitting :phase from context still requires human approval on a clean batch attest"
+    (let [[s actor] (fresh)
+          res (g/run* actor {:request {:op :batch/attest :batch "bt-jp"} :context {}}
+                      {:thread-id "mp"})]
+      (is (not= :commit (get-in res [:state :disposition]))
+          "a clean batch attest must not auto-commit when :phase is unset")
+      (is (nil? (store/assessment-of s "bt-jp")) "SSoT untouched without explicit phase"))))
+
 (deftest reject-signoff-holds
   (testing "a Council rejection records a hold, not a pathway authorization"
     (let [[s actor] (fresh)
