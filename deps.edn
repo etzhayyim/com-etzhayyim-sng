@@ -2,12 +2,12 @@
  ;; langgraph-clj brings langchain-clj transitively (both zero-/single-dep,
  ;; all .cljc → portable to JVM / SCI / ClojureScript / GraalVM).
  :deps {io.github.com-junkawasaki/langgraph-clj
-        {:local/root "../../com-junkawasaki/langgraph-clj"}}
+        {:local/root "../../kotoba-lang/langgraph"}}
  :aliases
  {;; offline workspace dev — pin transitive langchain-clj to local checkout
   :dev {:override-deps
         {io.github.com-junkawasaki/langchain-clj
-         {:local/root "../../com-junkawasaki/langchain-clj"}}}
+         {:local/root "../../kotoba-lang/langchain"}}}
   ;; clojure -M:dev:run → drive e-methane batch attestation through one actor
   :run {:main-opts ["-m" "sng.sim"]}
   :test {:extra-paths ["test"]
