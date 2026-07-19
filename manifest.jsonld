@@ -12,9 +12,6 @@
   "tier": "Tier-B",
   "parentActor": null,
   "firstTouchChannelInvariant": "app-aozora — com.atproto.repo.createRecord (collection com.etzhayyim.apps.sng). publication = SPEECH (autonomous); NOT actuation.",
-  "lexicons": [
-    "com.etzhayyim.apps.sng.batchAttestation"
-  ],
   "adr": {
     "topology": "com-junkawasaki:adr:2607022300"
   }
